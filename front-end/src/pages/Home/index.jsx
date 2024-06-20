@@ -2,17 +2,20 @@ import './style.css';
 
 function Home() {
     return (
-        <>
-            <section className='home-title' >
+        <main>
+            <section className='home_title' >
                 <h1 className='home_title_text'>Gerencie seus investiment com o Blue Fox Invest</h1>
             </section>
-            <main className="home">
-                <h2>Ações, FIIs, Critomoedas e Renda Fixas </h2>
-                <h2>Agilize sua declaração de Imposto de Renda</h2>
-                <h2>Orçamento pessoal</h2>
-                <h2>Tenha em mão analises e graficos intuitos sobre seus investimentos</h2>
-            </main>    
-        </>
+            <section className="home">
+                <h2 className='home_title_text'>Funcionalidades</h2>
+                <ul>
+                    <li className='home_item'>Gerencie suas compras de Ações, FIIs, Critomoedas e Renda Fixas</li>
+                    <li className='home_item'>Agilize sua declaração de Imposto de Renda</li>
+                    <li className='home_item'>Controle seu Orçamento pessoal</li>
+                    <li className='home_item'>Tenha em mão analises e graficos intuitos sobre dados</li>
+                </ul>
+            </section>    
+        </main>
     );
 }
 
