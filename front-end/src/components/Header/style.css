@@ -16,6 +16,10 @@ header {
 
 .border {
     border-bottom: 3px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 

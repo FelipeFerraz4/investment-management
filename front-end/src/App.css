@@ -1,0 +1,23 @@
+.app-container {
+    display: grid;
+    grid-template-rows: 2fr 15fr 1fr;
+    /* Header, Home, Footer com as proporções especificadas */
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    height: 100vh;
+    /* Ocupa a altura total da janela */
+}
+
+Header {
+    grid-area: header;
+}
+
+Home {
+    grid-area: main;
+}
+
+Footer {
+    grid-area: footer;
+}
