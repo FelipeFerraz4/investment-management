@@ -24,6 +24,12 @@ function Header() {
                             <li className="navbar_item">
                                 <a className="item" href="">Home</a>
                             </li>
+                            <li className="navbar_item">
+                                <a className="item" href="">Login</a>
+                            </li>
+                            <li className="navbar_item">
+                                <a className="item" href="">Cadastro</a>
+                            </li>
                         </ul>
                         </nav>
                     </div>
@@ -32,6 +38,12 @@ function Header() {
                     <ul className="header_navbar_list" >
                         <li className="navbar_item">
                             <a className="item" href="">Home</a>
+                        </li>
+                        <li className="navbar_item">
+                            <a className="item" href="">Login</a>
+                        </li>
+                        <li className="navbar_item">
+                            <a className="item" href="">Cadastro</a>
                         </li>
                     </ul>
                 </nav>

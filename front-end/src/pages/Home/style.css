@@ -1,0 +1,23 @@
+.home {
+    margin: 1em 2em;
+}
+
+.home-title {
+    width: auto;
+    height: 40vh;
+    margin-bottom: 1.5em;
+    background-image: url("../../assets//image/Caneta_e_Moedas.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.home_title_text {
+    color: rgb(0, 0, 0);
+    text-shadow: 0.05em 0.05em 0.05em white;
+}
