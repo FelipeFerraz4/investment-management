@@ -1,11 +1,12 @@
-import Brand from './components/Brand';
+import { Link } from 'react-router-dom';
+import VisualIdentity from './components/VisualIdentity';
 import './style.css';
 
 function Header() {
     return(
         <div className="border">
             <header id="Home" className="default_color container">
-                <Brand />
+                <VisualIdentity />
                 <div className="mobile_offcanvas"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
                     <div className="mobile_offcanvas_line"></div>
                     <div className="mobile_offcanvas_line"></div>
@@ -22,13 +23,15 @@ function Header() {
                         <nav className="header_navbar_offcanvas">
                         <ul className="header_navbar_list" >
                             <li className="navbar_item">
-                                <a className="item" href="">Home</a>
+                                <Link className="item" to="/">Home</Link>
+                                {/* <a className="item" href="">Home</a> */}
                             </li>
                             <li className="navbar_item">
-                                <a className="item" href="">Login</a>
+                                <Link className="item" to="/login">Login</Link>
+                                {/* <a className="item" href="">Login</a> */}
                             </li>
                             <li className="navbar_item">
-                                <a className="item" href="">Cadastro</a>
+                                <Link className="item" to="/register">Cadastro</Link>
                             </li>
                         </ul>
                         </nav>
@@ -37,13 +40,15 @@ function Header() {
                 <nav className="header_navbar">
                     <ul className="header_navbar_list" >
                         <li className="navbar_item">
-                            <a className="item" href="">Home</a>
+                            <Link className="item" to="/">Home</Link>
+                            {/* <a className="item" href="">Home</a> */}
                         </li>
                         <li className="navbar_item">
-                            <a className="item" href="">Login</a>
+                            <Link className="item" to="/login">Login</Link>
+                            {/* <a className="item" href="">Login</a> */}
                         </li>
                         <li className="navbar_item">
-                            <a className="item" href="">Cadastro</a>
+                            <Link className="item" to="/register">Cadastro</Link>
                         </li>
                     </ul>
                 </nav>
