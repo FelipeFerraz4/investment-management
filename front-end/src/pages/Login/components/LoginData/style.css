@@ -1,0 +1,114 @@
+.login {
+    flex: 2;
+    height: 100%;
+    width: 100%;
+
+    background-image: url("../../../../assets/image/pig_banner.png");
+    background-repeat: no-repeat;
+    /* background-position: -70px top; */
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_title {
+    color: white;
+    font-weight: bold;
+}
+
+.login_subtitle {
+    color: white;
+    font-weight: bold;
+    padding: 15px 0px;
+}
+
+.login_form_title {
+    color: white;
+    font-weight: bold;
+}
+
+.password-input-group {
+    width: 250px;
+    border-radius: 7px;
+}
+
+.password-input-group .password-toggle-icon {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.password-input-group .form-control {
+    position: relative;
+    padding-right: 2.5rem;
+}
+
+.password-input-group .password-toggle-icon {
+    position: absolute;
+    right: 0.5rem;
+    color: #6c757d;
+
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 0.5rem;
+    z-index: 2;
+}
+
+.login_error {
+    color: red;
+    margin: 0.5em 0em;
+}
+
+
+@media screen and (min-width: 452px) {
+    .login {
+        background-position: 0px;
+    }
+
+    .password-input-group {
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .login {
+        background-image: none;
+    }
+
+    .login_title {
+        color: black;
+    }
+
+    .login_subtitle {
+        color: black;
+    }
+
+    .login_form_title {
+        color: black;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .login_title {
+        font-size: 2em;
+    }
+
+    .login_subtitle {
+        font-size: 1.2em;
+    }
+
+    .login_form_title {
+        font-size: 1.6em;
+    }
+
+    .password-input-group {
+        width: 360px;
+    }
+}

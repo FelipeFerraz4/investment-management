@@ -1,0 +1,15 @@
+.login_image {
+    flex: 3;
+    background-image: url("../../assets/image/pig_banner.png");
+    background-repeat: no-repeat;
+    background-position: inherit;
+    background-size: cover;
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .login_image {
+        flex: 2;
+        display: flex;
+    }
+}

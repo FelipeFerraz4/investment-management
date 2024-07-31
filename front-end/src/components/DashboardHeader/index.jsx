@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
-import VisualIdentity from './components/VisualIdentity';
+import { Link } from "react-router-dom";
+import UserDropdown from "./components/UserDropdown";
+import VisualIdentity from "./components/VisualIdentity";
 import './style.css';
 
-function Header() {
+function DashboardHeader() {
     return(
         <div className="border">
             <header id="Home" className="default_color container">
@@ -22,16 +23,14 @@ function Header() {
                     <div className="offcanvas-body">
                         <nav className="header_navbar_offcanvas">
                         <ul className="header_navbar_list" >
-                            <li className="navbar_item">
-                                <Link className="item" to="/">Home</Link>
-                                {/* <a className="item" href="">Home</a> */}
+                            <li className="item">
+                                <Link className="item" to="/dashboard">DashBoard</Link>
                             </li>
-                            <li className="navbar_item">
-                                <Link className="item" to="/login">Login</Link>
-                                {/* <a className="item" href="">Login</a> */}
+                            <li className="item">
+                                <Link className="item" to="/dashboard">Relatórios</Link>
                             </li>
-                            <li className="navbar_item">
-                                <Link className="item" to="/register">Cadastro</Link>
+                            <li className="item">
+                                <UserDropdown/>
                             </li>
                         </ul>
                         </nav>
@@ -39,22 +38,20 @@ function Header() {
                 </div>
                 <nav className="header_navbar">
                     <ul className="header_navbar_list" >
-                        <li className="navbar_item">
-                            <Link className="item" to="/">Home</Link>
-                            {/* <a className="item" href="">Home</a> */}
+                        <li className="">
+                            <Link className="item" to="/dashboard">DashBoard</Link>
                         </li>
-                        <li className="navbar_item">
-                            <Link className="item" to="/login">Login</Link>
-                            {/* <a className="item" href="">Login</a> */}
+                        <li className="">
+                            <Link className="item" to="/dashboard">Relatórios</Link>
                         </li>
-                        <li className="navbar_item">
-                            <Link className="item" to="/register">Cadastro</Link>
+                        <li className="">
+                            <UserDropdown/>
                         </li>
                     </ul>
                 </nav>
             </header>
         </div>
-    )
+    );
 }
 
-export default Header;
+export default DashboardHeader;
