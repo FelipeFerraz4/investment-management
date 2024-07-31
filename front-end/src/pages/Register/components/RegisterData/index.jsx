@@ -1,11 +1,13 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Form, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import './style.css';
+import { useState } from 'react';
 
-function LoginData() {
+function RegisterData() {
+    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -14,24 +16,36 @@ function LoginData() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (email === 'user@user.com' && password === 'senha') {
-            setError('');
+        if (fullName != '' && email != '' && password != '') {
             navegate("/dashboard");
+            setError('');
         } else {
-            setError('E-mail ou senha invalido');
+            setError('Dados invalido');
         }
     };
 
     return(
-        <section className="login">
-            <h3 className="login_title">Gerenciador de Investimentos</h3>
-            <h6 className="login_subtitle">Faça seu login e tenha um bom dia</h6>
+        <section className="register">
+            <h3 className="register_title">Gerenciador de Investimentos</h3>
+            <h6 className="register_subtitle">Faça seu Cadastro e tenha um bom dia</h6>
+            
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formEmail">
-                    <Form.Label className="login_form_title">E-mail</Form.Label>
+                <Form.Group controlId="formFullName">
+                    <Form.Label className="register_form_title">Nome Completo</Form.Label>
                     <Form.Control 
-                        type="email" 
-                        placeholder="Digite seu e-mail" 
+                        type="text" 
+                        placeholder="Digite seu nome completo" 
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        required
+                        />
+                </Form.Group>
+
+                <Form.Group controlId="formEmail">
+                    <Form.Label className="register_form_title">E-mail</Form.Label>
+                    <Form.Control 
+                        type="email"
+                        placeholder="Digite seu e-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -39,7 +53,7 @@ function LoginData() {
                 </Form.Group>
 
                 <Form.Group controlId="formPassword" className="mt-3">
-                    <Form.Label className="login_form_title">Senha</Form.Label>
+                    <Form.Label className="register_form_title">Senha</Form.Label>
                     <InputGroup className="password-input-group">
                         <FormControl
                             type={showPassword ? 'text' : 'password'}
@@ -54,13 +68,13 @@ function LoginData() {
                     </InputGroup>
                 </Form.Group>
 
-                {error && <p className="login_error">{error}</p>}
+                {error && <p className="register_error">{error}</p>}
                 <Button variant="primary" type="submit" className="mt-3 w-100">
-                    Entrar
+                    Cadastrar
                 </Button>
             </Form>
         </section>
     );
 }
 
-export default LoginData;
+export default RegisterData;
