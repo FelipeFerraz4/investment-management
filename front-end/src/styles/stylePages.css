@@ -14,7 +14,7 @@ Header {
     grid-area: header;
 }
 
-Home {
+main {
     grid-area: main;
 }
 

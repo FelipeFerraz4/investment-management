@@ -1,32 +1,7 @@
-.home {
-    margin: 1em 2em;
-}
-
-.home_title {
-    width: auto;
-    height: 40vh;
-    margin-bottom: 1.5em;
-    background-image: url("../../assets//image/Caneta_e_Moedas.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    padding: 1em;
+.home_page {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.home_title_text {
-    color: rgb(0, 0, 0);
-    text-shadow: 0.05em 0.05em 0.05em white;
-    padding-bottom: 1em;
-}
-
-.home_item {
-    color: rgb(0, 0, 0);
-    list-style: none;
-    padding: 0.2em;
-    font-size: 1.5em;
-    font-weight: 600;
+    align-items: center;
+    gap: 1em;
 }

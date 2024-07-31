@@ -1,0 +1,24 @@
+.functionality {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.functionality_list {
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 1em;
+}
+
+@media screen and (min-width: 992px) {
+    .functionality_list {
+        flex-direction: row;
+        padding: 0em 5em;
+    }
+}

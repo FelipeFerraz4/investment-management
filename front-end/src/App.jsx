@@ -1,15 +1,19 @@
-import Footer from './components/Footer';
-import Header from './components/Header';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import Login from './pages/Login';
 import Home from './pages/Home';
-import './App.css';  // Importar o arquivo CSS
+// import Register from './pages/Register';
+// import DashBoard from './pages/DashBoard';
 
 function App() {
   return (
-    <div className="app-container">
-      <Header />
-      <Home />
-      <Footer />
-    </div>
+    <Router>
+            <Routes>
+                <Route path="/" element={<Home/>} />
+                {/* <Route path="/login" element={<Login />} /> */}
+                {/* <Route path="/register" element={<Register />} /> */}
+                {/* <Route path="/dashboard" element={<DashBoard />} /> */}
+            </Routes>
+    </Router>
   )
 }
 

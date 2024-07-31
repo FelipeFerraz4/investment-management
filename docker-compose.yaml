@@ -1,19 +1,28 @@
 services:
   front-end:
+    # Name of the container for the front-end service
     container_name: front-end
+    # Build the image from the Dockerfile located in the ./front-end directory
     build: ./front-end
+    # Mount the front-volume to /var/www/html inside the container
     volumes:
       - front-volume:/var/www/html
 
   nginx:
-    container_name: nginx-investiment
+    # Name of the container for the Nginx reverse proxy service
+    container_name: nginx-reverse-proxy
+    # Build the image from the Dockerfile located in the ./nginx directory
     build: ./nginx
+    # Map port 80 on the host to port 80 on the container
     ports:
       - 80:80
+    # Mount the same front-volume to /var/www/html inside the container
     volumes:
       - front-volume:/var/www/html
+    # Ensure the front-end service is started before the Nginx service
     depends_on:
       - front-end
 
+# Define the named volume 'front-volume' to be shared between services
 volumes:
   front-volume:
