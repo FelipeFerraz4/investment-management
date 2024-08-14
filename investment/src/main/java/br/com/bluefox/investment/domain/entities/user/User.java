@@ -4,6 +4,7 @@ import br.com.bluefox.investment.domain.Address;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class User {
+    private UUID id;
     private String cpf;
     private String name;
     private LocalDate dateOfBirth;
@@ -20,6 +22,7 @@ public class User {
     private Address address;
 
     public User (String cpf, String name, LocalDate dateOfBirth, String email, String password) {
+        this.id = UUID.randomUUID();
         this.cpf = cpf;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
