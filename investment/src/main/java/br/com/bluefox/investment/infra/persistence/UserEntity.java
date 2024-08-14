@@ -23,7 +23,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 public class UserEntity {
-
     @Id
     private UUID id;
     private String cpf;
