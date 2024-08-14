@@ -3,6 +3,7 @@ package br.com.bluefox.investment.domain.entities.user;
 import br.com.bluefox.investment.domain.Address;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class UserFactory {
     private User user;
@@ -18,7 +19,7 @@ public class UserFactory {
     }
 
     public User includesAddress(String cep, String number, String complement){
-        this.user.setAddress(new Address(cep, number, complement));
+        this.user.setAddress(new Address(UUID.randomUUID() , cep, number, complement));
         return this.user;
     }
 }
