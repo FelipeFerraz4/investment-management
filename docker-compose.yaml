@@ -7,6 +7,8 @@ services:
     # Mount the front-volume to /var/www/html inside the container
     volumes:
       - front-volume:/var/www/html
+    depends_on:
+      - investment
 
   nginx:
     # Name of the container for the Nginx reverse proxy service
@@ -23,6 +25,43 @@ services:
     depends_on:
       - front-end
 
-# Define the named volume 'front-volume' to be shared between services
+  # Service definition for the Spring application
+  investment:
+    # Name of the container for the Spring application
+    container_name: investment
+    # Build the image from the Dockerfile located in the ./investment directory
+    build: ./investment
+    # Map port 8080 on the host to port 8080 on the container
+    ports:
+      - "8080:8080"
+    # Environment variables to configure the database connection
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydatabase
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    # Ensure the PostgreSQL service is started before the Spring application
+    depends_on:
+      - postgres
+
+  # Service definition for PostgreSQL database
+  postgres:
+    # Name of the container for the PostgreSQL service
+    container_name: postgres
+    # Use the official PostgreSQL image version 13
+    image: postgres:13-alpine
+    # Environment variables to configure the database
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    # Map port 5432 on the host to port 5432 on the container
+    ports:
+      - "5432:5432"
+    # Mount the pgdata volume to persist database data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+# Define named volumes for persistent storage
 volumes:
   front-volume:
+  pgdata:
