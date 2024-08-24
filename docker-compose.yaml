@@ -1,67 +1,43 @@
 services:
-  front-end:
-    # Name of the container for the front-end service
-    container_name: front-end
-    # Build the image from the Dockerfile located in the ./front-end directory
-    build: ./front-end
-    # Mount the front-volume to /var/www/html inside the container
-    volumes:
-      - front-volume:/var/www/html
-    depends_on:
-      - investment
-
   nginx:
-    # Name of the container for the Nginx reverse proxy service
     container_name: nginx-reverse-proxy
-    # Build the image from the Dockerfile located in the ./nginx directory
     build: ./nginx
-    # Map port 80 on the host to port 80 on the container
     ports:
       - 80:80
-    # Mount the same front-volume to /var/www/html inside the container
     volumes:
       - front-volume:/var/www/html
-    # Ensure the front-end service is started before the Nginx service
-    depends_on:
-      - front-end
 
-  # Service definition for the Spring application
-  investment:
-    # Name of the container for the Spring application
-    container_name: investment
-    # Build the image from the Dockerfile located in the ./investment directory
-    build: ./investment
-    # Map port 8080 on the host to port 8080 on the container
+  front-end:
+    container_name: front-end
+    build: ./front-end
+    volumes:
+      - front-volume:/var/www/html
+    depends_on:
+      - back-end
+
+  back-end:
+    build:
+      context: ./investment
+    container_name: back-end
+    depends_on:
+      - database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/investment
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
       - "8080:8080"
-    # Environment variables to configure the database connection
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydatabase
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
-    # Ensure the PostgreSQL service is started before the Spring application
-    depends_on:
-      - postgres
 
-  # Service definition for PostgreSQL database
-  postgres:
-    # Name of the container for the PostgreSQL service
-    container_name: postgres
-    # Use the official PostgreSQL image version 13
-    image: postgres:13-alpine
-    # Environment variables to configure the database
+  database:
+    image: postgres
+    container_name: database
     environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    # Map port 5432 on the host to port 5432 on the container
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=investment
     ports:
-      - "5432:5432"
-    # Mount the pgdata volume to persist database data
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+      - 5432:5432
 
-# Define named volumes for persistent storage
 volumes:
   front-volume:
-  pgdata:

@@ -1,23 +1,17 @@
-# Use the official OpenJDK 17 image
-FROM openjdk:17-jdk-alpine
+FROM maven:latest AS build
 
-# Install Maven since it's not included in the base image
-RUN apk add --no-cache maven
-
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Maven project file to the container
 COPY pom.xml .
+COPY src src
 
-# Copy the source code to the container
-COPY src ./src
+RUN mvn package -DskipTests
 
-# Run Maven build to compile the project and package it as a JAR file
-RUN mvn clean package -DskipTests
+# Stage para execução da aplicação
+FROM openjdk:17-jdk-alpine
 
-# Copy the generated JAR file from the target directory to the container
-COPY target/investment-0.0.1-SNAPSHOT.jar app.jar
+WORKDIR /app
 
-# Define the command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=build /app/target/*.jar app.jar
+
+ENTRYPOINT ["java","-jar","/app/app.jar"]
