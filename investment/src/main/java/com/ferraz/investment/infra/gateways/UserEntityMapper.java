@@ -1,8 +1,11 @@
 package com.ferraz.investment.infra.gateways;
 
+import org.springframework.stereotype.Component;
+
 import com.ferraz.investment.domain.entities.user.User;
 import com.ferraz.investment.infra.persistence.UserEntity;
 
+@Component
 public class UserEntityMapper {
 
     private final AddressEntityMapper mapper;
