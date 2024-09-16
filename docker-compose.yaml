@@ -1,43 +1,47 @@
 services:
   nginx:
-    container_name: nginx-reverse-proxy
-    build: ./nginx
+    container_name: nginx-reverse-proxy  # The name of the container for the Nginx reverse proxy
+    build: ./nginx  # Path to the Dockerfile for building the Nginx image
     ports:
-      - 80:80
+      - 80:80  # Maps port 80 of the host to port 80 of the container
     volumes:
-      - front-volume:/var/www/html
+      - front-volume:/var/www/html  # Mounts the named volume "front-volume" to /var/www/html in the container
 
   front-end:
-    container_name: front-end
-    build: ./front-end
+    container_name: front-end  # The name of the container for the front-end application
+    build: ./front-end  # Path to the Dockerfile for building the front-end image
     volumes:
-      - front-volume:/var/www/html
+      - front-volume:/var/www/html  # Mounts the named volume "front-volume" to /var/www/html in the container
     depends_on:
-      - back-end
+      - back-end  # Ensures the back-end service is started before the front-end service
 
   back-end:
     build:
-      context: ./investment
-    container_name: back-end
+      context: ./investment  # Path to the Dockerfile for building the back-end image
+    container_name: back-end  # The name of the container for the back-end application
     depends_on:
-      - database
+      - database  # Ensures the database service is started before the back-end service
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/investment
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=admin
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/investment  # JDBC URL for connecting to the PostgreSQL database
+      - SPRING_DATASOURCE_USERNAME=admin  # Database username
+      - SPRING_DATASOURCE_PASSWORD=admin  # Database password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update  # Hibernate setting for schema management
+      - SECRET_KEY=my-secret-key  # Custom environment variable for the application
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Maps port 8080 of the host to port 8080 of the container
 
   database:
-    image: postgres
-    container_name: database
+    image: postgres  # Uses the official PostgreSQL image from Docker Hub
+    container_name: database  # The name of the container for the PostgreSQL database
     environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=investment
+      - POSTGRES_USER=admin  # PostgreSQL user
+      - POSTGRES_PASSWORD=admin  # PostgreSQL password
+      - POSTGRES_DB=investment  # PostgreSQL database name
     ports:
-      - 5432:5432
+      - 5432:5432  # Maps port 5432 of the host to port 5432 of the container
+    volumes:
+      - postgres-data:/var/lib/postgresql/data  # Mounts the named volume "postgres-data" to /var/lib/postgresql/data in the container
 
 volumes:
-  front-volume:
+  front-volume:  # Defines a named volume for the front-end application
+  postgres-data:  # Defines a named volume for persisting PostgreSQL data

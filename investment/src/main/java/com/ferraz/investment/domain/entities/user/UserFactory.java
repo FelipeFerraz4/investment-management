@@ -7,13 +7,13 @@ import java.util.UUID;
 public class UserFactory {
     private User user;
 
-    public User withNameCpfDateOfBirth(String name, String cpf, LocalDate dateOfBirth) {
-        this.user = new User(cpf, name, dateOfBirth, "", "");
+    public User withNameCpfDateOfBirth(String name, String cpf, LocalDate dateOfBirth, UserRole role) {
+        this.user = new User(cpf, name, dateOfBirth, "", "", role);
         return  this.user;
     }
 
-    public User withNameCpfDateOfBirth(String name, String cpf, LocalDate dateOfBirth, String email, String password) {
-        this.user = new User(cpf, name, dateOfBirth, email, password);
+    public User withNameCpfDateOfBirth(String name, String cpf, LocalDate dateOfBirth, String email, String password, UserRole role) {
+        this.user = new User(cpf, name, dateOfBirth, email, password, role);
         return  this.user;
     }
 

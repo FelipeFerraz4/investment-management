@@ -1,6 +1,7 @@
 package com.ferraz.investment.infra.gateways;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.ferraz.investment.domain.entities.user.User;
@@ -21,6 +22,11 @@ public class UserRepositoryJpa {
         UserEntity userEntity = mapper.toEntity(user);
         UserEntity savedEntity = repository.save(userEntity);
         return mapper.toDomain(savedEntity);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email)
+                .map(mapper::toDomain);
     }
 
     public List<User> findAll() {

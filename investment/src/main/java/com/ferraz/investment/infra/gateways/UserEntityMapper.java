@@ -23,6 +23,7 @@ public class UserEntityMapper {
             .email(user.getEmail())
             .password(user.getPassword())
             .address(mapper.toEntity(user.getAddress()))
+            .role(user.getRole())
             .build();
     }
 
@@ -35,6 +36,7 @@ public class UserEntityMapper {
                 .email(userEntity.getEmail())
                 .password(userEntity.getPassword())
                 .address(mapper.toDomain(userEntity.getAddress()))
+                .role(userEntity.getRole())
                 .build();
     }
 }

@@ -11,17 +11,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity // Marks this class as a JPA entity, allowing it to be mapped to a database table
 public class AddressEntity {
 
-    @Id
+    @Id // Marks this field as the primary key for the entity
+    @Column(name = "id", nullable = false, updatable = false, unique = true) // Column definition with properties: not nullable, not updatable, and unique
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "cep", nullable = false) // Maps this field to a non-nullable column named "cep" in the database
     private String cep;
 
-    @Column(nullable = false)
+    @Column(name = "number", nullable = false) // Maps this field to a non-nullable column named "number" in the database
     private String number;
 
+    @Column(name = "complement") // Maps this field to a column named "complement" (default nullable)
     private String complement;
 }
