@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import com.ferraz.investment.domain.Address;
 import com.ferraz.investment.domain.entities.user.User;
+import com.ferraz.investment.domain.entities.user.UserRole;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +36,9 @@ public record UserDTO(
     @Size(min = 6, message = "Password must be at least 6 characters long")
     String password,
 
+    @NotNull(message = "Role cannot be null")
+    UserRole role,
+
     @NotNull(message = "Address cannot be null")
     Address address) {
     
@@ -45,6 +49,7 @@ public record UserDTO(
             user.getDateOfBirth(), 
             user.getEmail(), 
             user.getPassword(),
+            user.getRole(),
             user.getAddress());
     }
 
@@ -56,6 +61,20 @@ public record UserDTO(
                 .dateOfBirth(this.dateOfBirth)
                 .email(this.email)
                 .password(this.password)
+                .role(this.role)
+                .address(this.address)
+                .build();
+    }
+
+    public User getUserEncryptedPassword(String password) {
+        return User.builder()
+                .id(UUID.randomUUID())
+                .cpf(this.cpf)
+                .name(this.name)
+                .dateOfBirth(this.dateOfBirth)
+                .email(this.email)
+                .password(password)
+                .role(this.role)
                 .address(this.address)
                 .build();
     }
