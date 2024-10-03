@@ -52,12 +52,10 @@ public class UserServiceImpl implements UserService{
             .orElseThrow(() -> new NoSuchElementException("User not found"));
         
         UserEntity updatedEntity = mapper.toEntity(user);
-        userEntity.setCpf(updatedEntity.getCpf());
         userEntity.setName(updatedEntity.getName());
         userEntity.setEmail(updatedEntity.getEmail());
         userEntity.setPassword(updatedEntity.getPassword());
-        userEntity.setDateOfBirth(updatedEntity.getDateOfBirth());
-        userEntity.setAddress(updatedEntity.getAddress());
+        userEntity.setRole(updatedEntity.getRole());
     
         userRepository.save(userEntity);
     }
