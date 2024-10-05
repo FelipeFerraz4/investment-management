@@ -9,7 +9,7 @@ public interface UserService {
 
     User searchById(UUID userId);
 
-    void insert(User user);
+    User insert(User user);
 
     void update(UUID userId, User user);
 

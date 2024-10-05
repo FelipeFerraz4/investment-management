@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ferraz.investment.domain.entities.user.User;
+import com.ferraz.investment.domain.entities.user.UserRole;
 import com.ferraz.investment.infra.persistence.UserEntity;
 import com.ferraz.investment.infra.gateways.UserEntityMapper;
 import com.ferraz.investment.infra.persistence.UserRepository;
@@ -42,8 +43,11 @@ public class UserServiceImpl implements UserService{
     }
     
     @Override
-    public void insert(User user) {
+    public User insert(User user) {
+        user.setId(UUID.randomUUID());
+        user.setRole(UserRole.USER);
         userRepository.save(mapper.toEntity(user));
+        return user;
     }
 
     @Override

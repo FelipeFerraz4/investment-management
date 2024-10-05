@@ -3,6 +3,7 @@ package com.ferraz.investment.infra.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ferraz.investment.domain.entities.user.User;
 import com.ferraz.investment.infra.service.UserService;
 
 import jakarta.validation.Valid;
@@ -37,9 +38,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable UUID userId) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable UUID id) {
         try {
-            return ResponseEntity.ok(new UserDTO(userService.searchById(userId)));
+            return ResponseEntity.ok(new UserDTO(userService.searchById(id)));
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -47,14 +48,14 @@ public class UserController {
     
     @PostMapping
     public ResponseEntity<UserDTO> postInsertUser(@Valid @RequestBody UserDTO userDTO) {
-        userService.insert(userDTO.getUser());
-        return ResponseEntity.ok(userDTO);
+        User user = userService.insert(userDTO.getUser());
+        return ResponseEntity.ok(new UserDTO(user));
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> putUpdateUser(@PathVariable UUID userId, @Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> putUpdateUser(@PathVariable UUID id, @Valid @RequestBody UserDTO userDTO) {
         try {
-            userService.update(userId, userDTO.getUser());
+            userService.update(id, userDTO.getUser());
             return ResponseEntity.ok(userDTO);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -62,9 +63,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable UUID userId) {
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         try {
-            userService.delete(userId);
+            userService.delete(id);
             return ResponseEntity.ok().build();
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
