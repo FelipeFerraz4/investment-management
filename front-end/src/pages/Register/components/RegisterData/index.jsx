@@ -1,10 +1,10 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { Form, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import './style.css';
-import { useState } from 'react';
 
 function RegisterData() {
     const [fullName, setFullName] = useState('');
@@ -12,15 +12,28 @@ function RegisterData() {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
-    const navegate = useNavigate();
+    const navigate = useNavigate(); // Corrigido
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if (fullName != '' && email != '' && password != '') {
-            navegate("/dashboard");
-            setError('');
+        if (fullName !== '' && email !== '' && password !== '') {
+            try {
+                const response = await axios.post('http://localhost:80/api/users', {
+                    name: fullName,
+                    email: email,
+                    password: password
+                });
+
+                if (response.status === 201) {
+                    navigate("/dashboard"); // Corrigido
+                    setError('');
+                }
+            } catch (error) { // Corrigido
+                setError('Erro ao cadastrar o usuário');
+                console.error('Erro:', error); // Corrigido
+            }
         } else {
-            setError('Dados invalido');
+            setError('Um dos campos está vazio');
         }
     };
 

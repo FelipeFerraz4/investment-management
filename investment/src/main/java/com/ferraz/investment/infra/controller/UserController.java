@@ -2,6 +2,7 @@ package com.ferraz.investment.infra.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ferraz.investment.domain.entities.user.User;
 import com.ferraz.investment.infra.service.UserService;
@@ -11,10 +12,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +27,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
+@CrossOrigin(origins = "http://172.19.0.3:80")
+// @CrossOrigin(origins = "http://nginx-reverse-proxy:80/")
 public class UserController {
 
     @Autowired
@@ -49,7 +54,14 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDTO> postInsertUser(@Valid @RequestBody UserDTO userDTO) {
         User user = userService.insert(userDTO.getUser());
-        return ResponseEntity.ok(new UserDTO(user));
+
+        URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(user.getId())
+            .toUri();
+
+        return ResponseEntity.created(location).body(new UserDTO(user));
     }
     
     @PutMapping("/{id}")

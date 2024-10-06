@@ -6,6 +6,10 @@ services:
       - 80:80  # Maps port 80 of the host to port 80 of the container
     volumes:
       - front-volume:/var/www/html  # Mounts the named volume "front-volume" to /var/www/html in the container
+    networks:
+      - investment-network  # Uses the custom network "investment-network"
+    depends_on:
+      - front-end
 
   front-end:
     container_name: front-end  # The name of the container for the front-end application
@@ -14,6 +18,8 @@ services:
       - front-volume:/var/www/html  # Mounts the named volume "front-volume" to /var/www/html in the container
     depends_on:
       - back-end  # Ensures the back-end service is started before the front-end service
+    networks:
+      - investment-network  # Uses the custom network "investment-network"
 
   back-end:
     build:
@@ -29,6 +35,8 @@ services:
       - SECRET_KEY=my-secret-key  # Custom environment variable for the application
     ports:
       - "8080:8080"  # Maps port 8080 of the host to port 8080 of the container
+    networks:
+      - investment-network  # Uses the custom network "investment-network"
 
   database:
     image: postgres  # Uses the official PostgreSQL image from Docker Hub
@@ -41,7 +49,13 @@ services:
       - 5432:5432  # Maps port 5432 of the host to port 5432 of the container
     volumes:
       - postgres-data:/var/lib/postgresql/data  # Mounts the named volume "postgres-data" to /var/lib/postgresql/data in the container
+    networks:
+      - investment-network  # Uses the custom network "investment-network"
 
 volumes:
   front-volume:  # Defines a named volume for the front-end application
   postgres-data:  # Defines a named volume for persisting PostgreSQL data
+
+networks:
+  investment-network:  # Defines the custom network for the application
+    driver: bridge  # Uses the bridge driver
