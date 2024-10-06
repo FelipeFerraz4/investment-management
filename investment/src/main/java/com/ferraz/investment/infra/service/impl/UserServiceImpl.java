@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService{
         this.userRepository = userRepository;
         this.mapper = mapper;
     }
-    
 
     @Override
     public List<User> searchAll() {
