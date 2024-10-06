@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import './style.css';
+import axios from 'axios';
 
 function LoginData() {
     const [email, setEmail] = useState('');
@@ -12,13 +13,24 @@ function LoginData() {
     const [error, setError] = useState('');
     const navegate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if (email === 'user@user.com' && password === 'senha') {
-            setError('');
-            navegate("/dashboard");
+        if (email !== '' && password !== '') {
+            try {
+                const response = await axios.post('http://localhost:80/api/auth', {
+                    email: email,
+                    password: password
+                });
+
+                if(response.status == 200){
+                    navegate("/dashboard");
+                    setError('');
+                }
+            } catch (error) {
+                setError('E-mail ou senha invalido');
+            }
         } else {
-            setError('E-mail ou senha invalido');
+            setError('Campos E-mail ou senha vazio');
         }
     };
 
