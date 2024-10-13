@@ -24,7 +24,7 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public void login(String email, String password) {
+    public User login(String email, String password) {
         UserEntity userEntity = userRepository.findByEmail(email)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
 
@@ -32,5 +32,8 @@ public class AuthServiceImpl implements AuthService{
         if (!user.getPassword().equals(password)){
             throw new PasswordMismatchException("User Invalid");
         }
+
+        return user;
+        
     }
 }

@@ -25,7 +25,8 @@ function RegisterData() {
                 });
 
                 if (response.status === 201) {
-                    navigate("/dashboard");
+                    const data = {id: response.data.id, name: response.data.name}
+                    navigate("/dashboard", {state: {userData: data}});
                     setError('');
                 }
             } catch (error) {

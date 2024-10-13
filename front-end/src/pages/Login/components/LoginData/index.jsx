@@ -23,7 +23,8 @@ function LoginData() {
                 });
 
                 if(response.status == 200){
-                    navegate("/dashboard");
+                    const data = {id: response.data.id, name: response.data.name};
+                    navegate("/dashboard", {state: {userData: data}});
                     setError('');
                 }
             } catch (error) {

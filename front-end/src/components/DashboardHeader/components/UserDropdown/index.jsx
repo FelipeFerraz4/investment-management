@@ -1,18 +1,18 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
+import './style.css';
 
-import './style.css'
+function UserDropdown({ user }) { // Desestruturar user
+    const navigate = useNavigate();
 
-function UserDropdown() {
-    const navegate = useNavigate();
     function logout() {
-        navegate("/login");
+        navigate("/login");
     }
 
-    return(
+    return (
         <Dropdown>
             <Dropdown.Toggle id="header_user">
-                <h4 className="header_user_title">Usuário</h4>
+                <h4 className="header_user_title">{user ? user.name : 'Usuário'}</h4> {/* Mostrar nome do usuário */}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
